@@ -4,15 +4,23 @@ project(GMR)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 
+add_subdirectory(extern)
+
+include_directories(extern
+                    source)
+
 set(    SOURCE_FILES
+
+        # UTIL
+        source/util/buffers.cpp
 
         # MAIN
         source/main.cpp
 
+        # OPUS
+        source/opus/rangedec.cpp
 )
 
-add_executable(SnapPP ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_compile_features(SnapPP PUBLIC cxx_std_17)
-
-target_include_directories(SnapPP PUBLIC "source")
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
